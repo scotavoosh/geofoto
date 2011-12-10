@@ -33,6 +33,10 @@ Dir.entries(Dir.pwd).each do |entry|
 end
 gpx = GPX::GPXFile.new(:gpx_file => gpx_filename)
 
+# SET THIS OFFSET
+# seconds difference between the time the GPS track was made and the picture was taken
+# e.g. 20 = Camera clock is 20 seconds ahead of GPS track
+# e.g. -15 = Camera clock is 15 seconds behind GPS track
 time_offset = 20
 
 pics = Pictures.new(Dir.pwd)
@@ -60,7 +64,7 @@ pics.pictures.each do |pic_file|
   pic.gpsaltitude = p.elevation
   pic.gpsaltituderef = (p.elevation > 0) ? 0 : 1
   t = p.time.getgm
-  pic.gpsdatestamp = t.strftime("%Y:%d:%m")
+  pic.gpsdatestamp = t.strftime("%Y:%m:%d")
   pic.gpstimestamp = t.strftime("%H:%M:%S")
   pic.save
   puts "#{pic.filename} was taken at (#{p.lat}, #{p.lon}) written with lat: #{pic.gpslatitude pic.gpslatituderef} long:#{pic.gpslongitude pic.gpslongituderef} elev:#{pic.gpsaltitude} m (#{pic.gpsaltituderef}) date:#{pic.gpsdatestamp} time:#{pic.gpstimestamp}"

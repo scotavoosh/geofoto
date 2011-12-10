@@ -1,1 +1,5 @@
-A simple project that will geotag .JPG photos in a directory.
+* Add your JPG's and GPX tracks file in the project's root directory.
+
+* Check that the time_offset is placing your photos using the correct trackpoint.
+
+* Run it!
